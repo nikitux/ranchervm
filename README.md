@@ -12,5 +12,7 @@ Simple Rancher environment manager, usage inspired by trobrock/chefvm
 After following these instructions reload your terminal, then
 
     ranchervm copy example production
-    ranchervm edit production 
+    ranchervm edit production (add your accessKey, secretKey , url)
+    ranchervm use production
+    
 
