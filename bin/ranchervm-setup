@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Usage: ranchervm setup
+# Summary: Setup symlinks and put you in a config
+# Help: This command is for initial environment load
+
+set -e
+
+__ranchervm_config
+[[ ! -e "$HOME/.rancher" && ! -L "$HOME/.rancher" ]] && ln -s $current_path $HOME/.rancher
+
+if [[ ! -e "$current_path" ]]; then
+  echo "[ranchervm] Creating an example rancher config and setting it to default"
+  ranchervm create example > /dev/null
+  ranchervm default example > /dev/null
+fi
+
+config=$(readlink $current_path | sed "s/$configurations\///")
+[[ -z "$config" ]] && ranchervm use default > /dev/null

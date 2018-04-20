@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Usage: ranchervm delete CONFIG
+# Summary: Delete a config from ranchervm
+# Help: This command will delete a configuration from ranchervm, this cannot be undone.
+
+set -e
+
+if [ -z "$1" ]; then
+  echo "No name provided"
+  exit 1
+fi
+
+__ranchervm_config $1
+
+default_config=$(readlink $default_path) || true
+if [[ "$default_config" == "$config" ]]; then
+  rm $default_path
+fi
+
+current_config=$(readlink $current_path | sed "s/$configurations\///")
+if [[ "$current_config" == "$config" ]]; then
+  rm $current_path
+fi
+
+rm -rf $_RANCHERVM_ROOT/$config_path
+
+echo "Removed $config"

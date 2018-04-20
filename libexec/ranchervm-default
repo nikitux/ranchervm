@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Usage: ranchervm default [CONFIG]
+# Summary: This will switch to your default configuration, or set it
+# Help: If you pass this command a config name, it will set your default to that config.
+#  If you don't pass a config it will switch you to your default.
+
+set -e
+
+if [ -z "$1" ]; then
+  ranchervm use "default"
+  exit 0
+fi
+
+__ranchervm_config $1
+
+rm -f $default_path
+ln -s $config $default_path
+
+echo "Default rancher configuration set to: $config"

@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Usage: ranchervm use CONFIG
+# Summary: Switch to the specified configuration
+# Help: This command will set your environment to use the specified rancher configuration
+
+set -e
+
+__ranchervm_config $1
+
+# Provide ranchervm completions
+if [ "$1" = "--complete" ]; then
+  exec ls $_RANCHERVM_ROOT/$configurations
+fi
+
+if [[ "$1" == "default" ]] && [ ! -d "$_RANCHERVM_ROOT/$config_path" ]; then
+  echo "No default config set"
+  exit 1
+elif [ ! -d "$_RANCHERVM_ROOT/$config_path" ]; then
+  echo "No configuration with that name was found"
+  exit 2
+fi
+
+rm -f $current_path
+ln -s $config_path $current_path
+
+echo "Using rancher config \"$config\""
+echo "Current URL : $(export | grep RANCHER_URL | awk '{print $3}'| cut -d "\"" -f 2)"
+echo " "
+echo "Please reload config RanReload or source $config_path/config "

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Usage: ranchervm current
+# Summary: Shows the current config
+
+set -e
+
+__ranchervm_config $1
+
+echo $config

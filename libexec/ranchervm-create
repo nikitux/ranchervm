@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Usage: ranchervm create CONFIG
+# Summary: Create a config in ranchervm
+# Help: This command will create a rancher configuration in ranchervm, and switch to using it.
+
+set -e
+
+if [ -z "$1" ]; then
+  echo "No name provided"
+  exit 1
+fi
+
+__ranchervm_config $1
+
+mkdir -p $_RANCHERVM_ROOT/$config_path
+
+echo "Creating configuration: $config"
+ranchervm use $config
+echo "Copy your pem file to ~/.rancher and run 'knife configure'"

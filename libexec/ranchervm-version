@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Usage: ranchervm version
+# Summary: Show the current version of ranchervm
+# Help: This command will show the currently installed version of ranchervm
+
+set -e
+
+echo $_RANCHERVM_VERSION
