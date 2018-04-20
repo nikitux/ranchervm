@@ -48,7 +48,7 @@ if [ -z "$print" ]; then
   esac
 
   { echo "# Load ranchervm automatically by adding"
-    echo "# the following to ${profile}:"
+    echo "# the following to ~/.bash_profile (OSX) / ~/.bashrc (Linux):"
     echo
     echo "eval \"\$(${_RANCHERVM_ROOT}/bin/ranchervm init -)\""
     echo
